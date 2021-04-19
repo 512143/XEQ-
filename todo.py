@@ -20,6 +20,8 @@ while True:
   elif userAnswer == "help":
     print(HELP)
   elif userAnswer == "show":
+    for date in todo.keys():
+      print( f"[{date}] - \t {todo[date] }")
     print("Rabotaet")
   elif userAnswer == "exit":
     break
