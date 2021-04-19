@@ -1,3 +1,4 @@
+HELP = """
 add - добавить задачу
 show - показатб задачу
 done - убрать выполн задачу
@@ -11,7 +12,11 @@ while True:
   userAnswer = input()
 
   if userAnswer == "add":
-    print("Работает")
+    userDate = input("VVedi daty:\n")
+    userTask = input("Chto nujno sdelatb?")
+    todo[ userDate] = userTask
+    print(f"[ {userDate} ] - AddTask'{userTask}'")
+    
   elif userAnswer == "help":
     print(HELP)
   elif userAnswer == "show":
