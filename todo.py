@@ -17,6 +17,12 @@ while True:
     todo[ userDate] = userTask
     print(f"[ {userDate} ] - AddTask'{userTask}'")
     
+    if userDate in todo.keys():
+      todo[userDate].append(userTask)
+    else:
+      todo[userDate]=[userTask]
+    print(f"[{userDate}]-добавлена задача'{userTask}'")
+
   elif userAnswer == "help":
     print(HELP)
   elif userAnswer == "show":
