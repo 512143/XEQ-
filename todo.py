@@ -19,21 +19,29 @@ def checkDate(date):
     print("Error.Неправильная дата")
     return False
 
+def add(command,userAnswer):
+  if command == 1:
+    #получить дату
+  elif command == 2:
+    #получить task и добавить в todo
+  userDate = input("VVedi daty:\n")
+  if checkDate(userDate)==False:
+        continue
+      userTask = input("Chto nujno sdelatb?")
+
+      if userDate in todo.keys():
+        todo[userDate].append(userTask)
+     else:
+       todo[userDate]=[userTask]
+      print(f"[{userDate}]-добавлена задача'{userTask}'") 
+
 print ("введите комаду или help")
 
 while True:
   userAnswer = input()
 
   if userAnswer == "add":
-    userDate = input("VVedi daty:\n")
-    userTask = input("Chto nujno sdelatb?")
-
     
-    if userDate in todo.keys():
-      todo[userDate].append(userTask)
-    else:
-      todo[userDate]=[userTask]
-    print(f"[{userDate}]-добавлена задача'{userTask}'")
 
   elif userAnswer == "help":
     print(HELP)
