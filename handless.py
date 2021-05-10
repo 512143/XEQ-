@@ -10,6 +10,9 @@ reqv = 0
 0 - ojif=danie commandi
 1 - ojidanie dati
 2 - ojidanie zadachi
+3 - ojidanie dati dlya command
+4 - delete 1 elements
+5 - delete elementa po viboru
 """
 
 
@@ -61,3 +64,39 @@ async def echo(message:Message):
         todo[uDate] = [uTask]
       await message.answer(f"dobavlena zadacha'{uTask}'na {uDate}")
       reqv = 0
+
+@dp.message_handler()
+async def echo(message:Message):
+  global reqv, uDate, uTask, todo
+  if reqv == 3:
+    uDate = message.text
+    try:
+      time.strptime(uDate, "%d.%m.%Y")
+    except ValueError:
+      message.answer(text = "ne verniy format dati")
+      reqv = 0
+      return
+
+    if uDate in todo:
+      if len(todo[uDate]) == 1:
+        tmp = todo.pop(uDate)
+        await message.answer(f"zadacha  '{tmp}' - udalena")
+      else:
+        await message.answer("Kakuy zadachu nado udalitb ?")
+        tmp = 1
+        for task in todo[uDate]:
+          await message.answer(f"[{tmp}]- {task}")
+          tmp +=1
+        reqv = 4
+    else:
+      await message.answer("Net zadach na etu datu")
+      reqv = 0
+  elif reqv == 4:
+    try:
+      int(message.text)
+    except ValueError:
+      await message.answer("Ne vernii format command")
+      reqv = 0
+      return
+    if len(todo[uDate]) <= int(message.text):
+      await message.answer(f"zadacha  '{}' - udalena")
